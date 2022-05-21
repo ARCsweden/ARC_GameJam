@@ -8,7 +8,6 @@ public class FlapField : MonoBehaviour
     float TBD;
     public FlapVisual flapVisual;
     private HashSet<GameObject> _inrange = new HashSet<GameObject>();
-    Collider ff;
 
     void OnDisable()
     {
@@ -39,12 +38,13 @@ void Start()
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        ff = flapVisual.flapForce;
+        float ff = flapVisual.flapForce;
         foreach(GameObject gB in _inrange){
             Rigidbody rig = gB.GetComponent<Rigidbody>();
-            new Vector3 dir = (100f, 100f, 100f);
+            Vector3 dir = gB.transform.position - gameObject.transform.position;
+            Debug.Log("dir: " + dir);
             rig.AddForce(ff * dir);
         }
     }
