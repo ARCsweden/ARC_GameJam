@@ -4821,6 +4821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 903684034484970214}
+  - component: {fileID: 4257040499325973039}
   m_Layer: 0
   m_Name: Fin Joint
   m_TagString: Untagged
@@ -4844,6 +4845,20 @@ Transform:
   m_Father: {fileID: 7422775702577392080}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4257040499325973039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284773055059927939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d2b515a1ca2a6768f5c8eae0cc8a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rig: {fileID: 7422775702577392084}
+  flapper: {fileID: 9142717711789656798}
 --- !u!1 &6786113300088382630
 GameObject:
   m_ObjectHideFlags: 0

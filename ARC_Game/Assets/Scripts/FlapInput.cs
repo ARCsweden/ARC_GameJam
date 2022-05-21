@@ -18,14 +18,14 @@ public class FlapInput : MonoBehaviour
     void Update()
     {
         finPos = getInputFinUp - getInputFinDown;
-        Debug.Log("FinPos: " + finPos);
+        //Debug.Log("FinPos: " + finPos);
     }
 
     private void OnFinUp(InputValue input)
     {
 
         getInputFinUp = input.Get<float>();
-        Debug.Log("FinUp: " + getInputFinUp);
+        //Debug.Log("FinUp: " + getInputFinUp);
 
     }
 
