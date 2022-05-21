@@ -45,7 +45,7 @@ public class random_color : MonoBehaviour
             var rightThrusterRenderer = gameObject.transform.Find("Right Thruster").GetComponent<Renderer>();
             rightThrusterRenderer.material.SetColor("_Color", playerColor);
 
-            var finRenderer = gameObject.transform.Find("Fin").GetComponent<Renderer>();
+            var finRenderer = gameObject.transform.Find("Fin Joint/Fin").GetComponent<Renderer>();
             finRenderer.material.SetColor("_Color", playerColor);
 
             playerRenderer.material.SetColor("_Color", playerColor);

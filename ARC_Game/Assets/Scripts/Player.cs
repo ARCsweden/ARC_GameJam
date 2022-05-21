@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     private void OnRightThruster(InputValue input)
     {
         Vector2 getInputRightThrust = input.Get<Vector2>();
-        Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
+        //Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
     }
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     private void OnLeftThruster(InputValue input)
     {
         Vector2 getInputLeftThrust = input.Get<Vector2>();
-        Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
+        //Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
     }
