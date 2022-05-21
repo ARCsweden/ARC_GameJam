@@ -88,6 +88,14 @@ public class Player : MonoBehaviour
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player"))
+        {
+            TakeDamage();
+        }
+    }
+
     private void OnTorpedo()
     {
 
