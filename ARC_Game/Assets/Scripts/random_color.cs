@@ -5,7 +5,7 @@ using UnityEngine;
 public class random_color : MonoBehaviour
 {
     // List of available colors shared by each player instance
-    public static List<UnityEngine.Color> availableColors = new List<UnityEngine.Color> {Color.blue, Color.cyan, Color.grey, Color.magenta, Color.red, Color.yellow };
+    public static List<UnityEngine.Color> availableColors = new List<UnityEngine.Color> {new Color(1,0,0,1), new Color(1, 0.2f, 0.5f, 1), Color.grey, Color.magenta, new Color(0.4f, 1f, 0.5f, 1), Color.yellow };
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,8 @@ public class random_color : MonoBehaviour
             finRenderer.material.SetColor("_Color", Color.green);
 
             playerRenderer.material.SetColor("_Color", Color.green);
+            Player playerScript = gameObject.GetComponent<Player>();
+            playerScript.playerColor = Color.green;
         }
         else
         // Use a random color of the available colors and remove that color from the list
@@ -49,6 +51,8 @@ public class random_color : MonoBehaviour
             finRenderer.material.SetColor("_Color", playerColor);
 
             playerRenderer.material.SetColor("_Color", playerColor);
+            Player playerScript = gameObject.GetComponent<Player>();
+            playerScript.playerColor = playerColor;
         }
 
     }

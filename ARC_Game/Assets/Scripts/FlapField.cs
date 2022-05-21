@@ -48,7 +48,7 @@ void Start()
         foreach(GameObject gB in _inrange){
             if (gB != null)
             {
-                Debug.Log(gB.name + ", " + gameObject.name);
+                //Debug.Log(gB.name + ", " + gameObject.name);
                 Rigidbody rig = gB.GetComponent<Rigidbody>();
                 Vector3 dir = gB.transform.position - gameObject.transform.position;
                 rig.AddForce(ff * dir);

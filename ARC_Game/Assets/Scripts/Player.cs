@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public Material SubMat;
+    public Color playerColor;
     // Rigidbody references:
     public Rigidbody mainSubRigidbody;
     public Rigidbody leftThrusterRigidbody;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //playerColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
 
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);  
 
         if(health <= 0){
-            random_color.availableColors.Add(SubMat.color);
+            random_color.availableColors.Add(playerColor);
             //Destroy(gameObject);
             health = maxHealth;
             resetSub();
@@ -125,6 +125,8 @@ public class Player : MonoBehaviour
             torpedo.transform.Rotate(Vector3.forward, 180);
             torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
             torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 3000, ForceMode.Impulse);
+            var topedoRenderer = torpedo.GetComponent<Renderer>();
+            topedoRenderer.material.SetColor("_Color", playerColor); 
             Invoke("ResetCooldown", 0.7f);
         }
     }

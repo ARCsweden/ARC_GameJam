@@ -10305,7 +10305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d7b6d7ad458d64db0add6b6589a2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomColorScript: {fileID: 5024538555614501192}
   SubMat: {fileID: 2100000, guid: 7851026658c26824c8cdeec72b3c7de8, type: 2}
   mainSubRigidbody: {fileID: 7422775702577392084}
   leftThrusterRigidbody: {fileID: 7422775704344752496}
@@ -10345,13 +10344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390bd4925e85587308ec6e19efebafaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableColors:
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 0, g: 1, b: 1, a: 1}
-  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  - {r: 1, g: 0, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!135 &1326690875275102186
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10739,7 +10731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3483025319373009404
 Transform:
   m_ObjectHideFlags: 0
