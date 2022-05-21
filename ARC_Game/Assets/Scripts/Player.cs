@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
+    public Material SubMat;
     // Rigidbody references:
     public Rigidbody mainSubRigidbody;
     public Rigidbody leftThrusterRigidbody;
@@ -64,7 +64,10 @@ public class Player : MonoBehaviour
         rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);  
 
         if(health <= 0){
-            Destroy(gameObject);
+            random_color.availableColors.Add(SubMat.color);
+            //Destroy(gameObject);
+            health = maxHealth;
+            resetSub();
         }
 
     }
@@ -91,7 +94,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
             TakeDamage();
         }
@@ -130,6 +133,11 @@ public class Player : MonoBehaviour
         cooldown = false;
     }
     private void OnReset()
+    {
+        resetSub();
+    }
+
+    private void resetSub()
     {
         steerInputRightThrust = new Vector3(0, 0, 0);
         steerInputLeftThrust = new Vector3(0, 0, 0);

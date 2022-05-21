@@ -5,7 +5,7 @@ using UnityEngine;
 public class random_color : MonoBehaviour
 {
     // List of available colors shared by each player instance
-    static List<UnityEngine.Color> availableColors = new List<UnityEngine.Color> {Color.blue, Color.cyan, Color.grey, Color.magenta, Color.red, Color.yellow };
+    public static List<UnityEngine.Color> availableColors = new List<UnityEngine.Color> {Color.blue, Color.cyan, Color.grey, Color.magenta, Color.red, Color.yellow };
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class random_color : MonoBehaviour
             var rightThrusterRenderer = gameObject.transform.Find("Right Thruster").GetComponent<Renderer>();
             rightThrusterRenderer.material.SetColor("_Color", Color.green);
 
-            var finRenderer = gameObject.transform.Find("Fin").GetComponent<Renderer>();
+            var finRenderer = gameObject.transform.Find("Fin Joint/Fin").GetComponent<Renderer>();
             finRenderer.material.SetColor("_Color", Color.green);
 
             playerRenderer.material.SetColor("_Color", Color.green);
