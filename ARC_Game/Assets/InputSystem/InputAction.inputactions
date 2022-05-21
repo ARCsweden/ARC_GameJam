@@ -172,34 +172,23 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "16cc21cc-3375-486b-95a6-f963c7701528",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "RightThruster",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "69dd37ec-a951-4fcb-8161-9d355644dd20",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "RightThruster",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "f2a50437-9ab8-4d32-9e60-d961e3ce7861",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
+                    "action": "FinUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a27796c-e903-41a1-9b52-12e7fd63565a",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "FinUp",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -217,8 +206,19 @@
                 },
                 {
                     "name": "",
+                    "id": "b0fd9d20-1596-4102-8acd-c4e97aa9c0eb",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "FinDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "36c4c165-4176-4fc0-aab6-7a7f7070458f",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
