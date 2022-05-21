@@ -42,6 +42,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Damage",
+                    "type": "Button",
+                    "id": "f1dd396f-7177-40f5-bdc6-19af5ba57cd6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Torpedo",
                     "type": "Button",
                     "id": "2e8bd5ce-9186-4935-8071-b2f0205f96ef",
@@ -212,6 +221,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "FinDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72a6628b-9780-4d0a-b143-1347f6d9d053",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Damage",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

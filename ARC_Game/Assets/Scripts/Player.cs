@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public float thrustPower = 1000;
     public float particlePower;
     public int particleEmissionRateOverTime = 20;
+    public float health, maxHealth;
+    public HealthBar healthBar; 
 
     public GameObject prefa;
     public float space = 2;
@@ -31,13 +33,23 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        maxHealth = 100;
+        health = maxHealth;
+        healthBar.UpdateHealthBar();
     }
 
     private void FixedUpdate()
     {
         leftThrusterRigidbody.AddRelativeForce(steerInputLeftThrust * thrustPower);
         rightThrusterRigidbody.AddRelativeForce(steerInputRightThrust * thrustPower);
+    }
+
+    // if damage is taken, calls a function in the healthbar script
+    public void TakeDamage()
+    {
+        // Use your own damage handling code, or this example one.    
+        health -= 10f;
+        healthBar.UpdateHealthBar();
     }
 
     // Update is called once per frame
@@ -48,9 +60,18 @@ public class Player : MonoBehaviour
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
 
         rightThrusterParticleSystem.startSpeed = particlePower * (-steerInputRightThrust.y);
-        rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);
+        rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);  
+
+        if(health <= 0){
+            Destroy(gameObject);
+        }
+
     }
 
+    private void OnDamage(){
+        //Debug.Log("TakeDamage");
+        TakeDamage();
+    }
     private void OnRightThruster(InputValue input)
     {
         Vector2 getInputRightThrust = input.Get<Vector2>();
