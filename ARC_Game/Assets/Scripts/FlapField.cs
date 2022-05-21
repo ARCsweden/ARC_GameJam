@@ -9,6 +9,8 @@ public class FlapField : MonoBehaviour
     public FlapVisual flapVisual;
     private HashSet<GameObject> _inrange = new HashSet<GameObject>();
 
+    static List<string> tracked_tags = new List<string> {"Player", "Module"};
+
     void OnDisable()
     {
         _inrange.Clear();
@@ -16,10 +18,11 @@ public class FlapField : MonoBehaviour
 
     void OnTriggerEnter(Collider c) //change to 2d for 2d
     {
-        if(c.gameObject.tag == "Player")
+        // Check if object should be affected by flapforce
+        if(tracked_tags.Contains(c.gameObject.tag))
         {
             _inrange.Add(c.gameObject);
-            Debug.Log("Player entered my safe space");
+            //Debug.Log("Player entered my safe space");
         }
         
     }
@@ -27,7 +30,7 @@ public class FlapField : MonoBehaviour
     void OnTriggerExit(Collider c) //change to 2d for 2d
     {
         _inrange.Remove(c.gameObject);
-        Debug.Log("Player respects my safe space");
+        //Debug.Log("Player respects my safe space");
     }
 
 
@@ -42,9 +45,9 @@ void Start()
     {
         float ff = flapVisual.flapForce;
         foreach(GameObject gB in _inrange){
+            Debug.Log(gB.name + ", " + gameObject.name);
             Rigidbody rig = gB.GetComponent<Rigidbody>();
             Vector3 dir = gB.transform.position - gameObject.transform.position;
-            Debug.Log("dir: " + dir);
             rig.AddForce(ff * dir);
         }
     }
