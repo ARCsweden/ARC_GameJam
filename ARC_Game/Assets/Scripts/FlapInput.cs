@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FlapInput : MonoBehaviour
 {
@@ -14,5 +15,21 @@ public class FlapInput : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnFinUp(InputValue input)
+    {
+
+        float getInputFinUp = input.Get<float>();
+        Debug.Log("FinUp: " + getInputFinUp);
+
+    }
+
+    private void OnFinDown(InputValue input)
+    {
+
+        float getInputFinDown = input.Get<float>();
+        Debug.Log("FinDown: " + getInputFinDown);
+
     }
 }

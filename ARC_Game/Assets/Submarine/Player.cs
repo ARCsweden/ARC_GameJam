@@ -7,22 +7,22 @@ public class Player : MonoBehaviour
 {
 
     // Rigidbody references:
-    public Rigidbody MainSubRigidbody;
-    public Rigidbody LeftThrusterRigidbody;
-    public Rigidbody RightThrusterRigidbody;
+    public Rigidbody mainSubRigidbody;
+    public Rigidbody leftThrusterRigidbody;
+    public Rigidbody rightThrusterRigidbody;
 
     // Particle system references:
-    public ParticleSystem LeftThrusterParticleSystem;
-    public ParticleSystem RightThrusterParticleSystem;
+    public ParticleSystem leftThrusterParticleSystem;
+    public ParticleSystem rightThrusterParticleSystem;
 
     // Public variables:
-    public float ThrustPower = 1000;
-    public float ParticlePower;
-    public int ParticleEmissionRateOverTime = 20;
+    public float thrustPower = 1000;
+    public float particlePower;
+    public int particleEmissionRateOverTime = 20;
 
     // Internal variables:
-    Vector3 SteerInputRightThrust;
-    Vector3 SteerInputLeftThrust;
+    Vector3 steerInputRightThrust;
+    Vector3 steerInputLeftThrust;
 
     // Start is called before the first frame update
     void Start()
@@ -38,29 +38,29 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LeftThrusterRigidbody.AddRelativeForce(SteerInputLeftThrust * ThrustPower);
-        RightThrusterRigidbody.AddRelativeForce(SteerInputRightThrust * ThrustPower);
+        leftThrusterRigidbody.AddRelativeForce(steerInputLeftThrust * thrustPower);
+        rightThrusterRigidbody.AddRelativeForce(steerInputRightThrust * thrustPower);
 
-        LeftThrusterParticleSystem.startSpeed = ParticlePower * (-SteerInputLeftThrust.y);
-        LeftThrusterParticleSystem.emissionRate = ParticleEmissionRateOverTime* Mathf.Abs(SteerInputLeftThrust.y);
+        leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
+        leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
 
-        RightThrusterParticleSystem.startSpeed = ParticlePower * (-SteerInputRightThrust.y);
-        RightThrusterParticleSystem.emissionRate = ParticleEmissionRateOverTime * Mathf.Abs(SteerInputRightThrust.y);
+        rightThrusterParticleSystem.startSpeed = particlePower * (-steerInputRightThrust.y);
+        rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);
     }
 
-    private void OnRightThruster(InputValue Input)
+    private void OnRightThruster(InputValue input)
     {
-        Vector2 getInputRightThrust = Input.Get<Vector2>();
+        Vector2 getInputRightThrust = input.Get<Vector2>();
         Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
-        SteerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
+        steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
     }
 
-    private void OnLeftThruster(InputValue Input)
+    private void OnLeftThruster(InputValue input)
     {
-        Vector2 getInputLeftThrust = Input.Get<Vector2>();
+        Vector2 getInputLeftThrust = input.Get<Vector2>();
         Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
-        SteerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
+        steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
     }
 }

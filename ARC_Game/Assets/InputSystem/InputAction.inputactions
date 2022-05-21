@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "FinUp",
+                    "type": "Value",
+                    "id": "fa9edd52-ca90-4830-b86e-358bcaef1844",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "FinDown",
+                    "type": "Value",
+                    "id": "c06163d5-09d4-4456-a991-3054c6a15964",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -156,6 +174,28 @@
                     "action": "RightThruster",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f2a50437-9ab8-4d32-9e60-d961e3ce7861",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "FinUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "343b45df-3b4d-4c2e-901e-afbfcae4699c",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "FinDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

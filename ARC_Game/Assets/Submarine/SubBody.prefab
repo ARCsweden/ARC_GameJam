@@ -9639,6 +9639,7 @@ GameObject:
   - component: {fileID: 7422775702577392084}
   - component: {fileID: 7422775702577392107}
   - component: {fileID: 525511187056077164}
+  - component: {fileID: 9142717711789656798}
   m_Layer: 0
   m_Name: SubBody
   m_TagString: Untagged
@@ -9787,14 +9788,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d7b6d7ad458d64db0add6b6589a2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSubRigidbody: {fileID: 7422775702577392084}
-  LeftThrusterRigidbody: {fileID: 7422775704344752496}
-  RightThrusterRigidbody: {fileID: 7422775704237066046}
-  LeftThrusterParticleSystem: {fileID: 2034629336946529519}
-  RightThrusterParticleSystem: {fileID: 7245374216757623485}
-  ThrustPower: 1000
-  ParticlePower: 5
-  ParticleEmissionRateOverTime: 20
+  mainSubRigidbody: {fileID: 7422775702577392084}
+  leftThrusterRigidbody: {fileID: 7422775704344752496}
+  rightThrusterRigidbody: {fileID: 7422775704237066046}
+  leftThrusterParticleSystem: {fileID: 2034629336946529519}
+  rightThrusterParticleSystem: {fileID: 7245374216757623485}
+  thrustPower: 1000
+  particlePower: 0
+  particleEmissionRateOverTime: 20
+--- !u!114 &9142717711789656798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7422775702577392106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af0cd668ffc85bd46b835653fde04bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7422775702963197605
 GameObject:
   m_ObjectHideFlags: 0
@@ -9806,10 +9819,6 @@ GameObject:
   - component: {fileID: 7422775702963197606}
   - component: {fileID: 7422775702963197601}
   - component: {fileID: 7422775702963197600}
-  - component: {fileID: 7422775702963197607}
-  - component: {fileID: 1881915767063324088}
-  - component: {fileID: 3725283599260727544}
-  - component: {fileID: 7343440704001729718}
   m_Layer: 0
   m_Name: Fin
   m_TagString: Untagged
@@ -9824,14 +9833,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7422775702963197605}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.095, z: 0}
   m_LocalScale: {x: 1, y: 0.56342, z: 0.024546}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7422775702577392080}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7422775702963197601
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9882,65 +9891,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7422775702963197607
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7422775702963197605}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1881915767063324088
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7422775702963197605}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 56
-  m_CollisionDetection: 0
---- !u!138 &3725283599260727544
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7422775702963197605}
-  m_ConnectedBody: {fileID: 7422775702577392084}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!138 &7343440704001729718
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7422775702963197605}
-  m_ConnectedBody: {fileID: 7422775702577392084}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &7422775704237066044
 GameObject:
   m_ObjectHideFlags: 0
