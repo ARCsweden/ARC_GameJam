@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     Vector3 steerInputRightThrust;
     Vector3 steerInputLeftThrust;
 
+    private bool cooldown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour
 
     private void OnTorpedo()
     {
+
         //LeftThrusterRigidbody.AddForce(0, 0, 0);
         //RightThrusterRigidbody.AddForce(0, 0, 0);
         /*SteerInputRightThrust = new Vector3(0, 0, 0);
@@ -81,14 +83,22 @@ public class Player : MonoBehaviour
         LeftThrusterRigidbody.velocity = Vector3.zero;
         RightThrusterRigidbody.velocity = Vector3.zero;
         //SteerInputLeftThrust = new Vector3(0, 10, 0);*/
-        Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3 (0,-space,0));
+        if(cooldown == false)
+        {
+            cooldown = true;
+            Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3 (0,-space,0));
 
-        GameObject torpedo = GameObject.Instantiate(prefa, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
-        torpedo.transform.Rotate(Vector3.forward, 180);
-        torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
-        torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 15, ForceMode.Impulse);
-    } 
-
+            GameObject torpedo = GameObject.Instantiate(prefa, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
+            torpedo.transform.Rotate(Vector3.forward, 180);
+            torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
+            torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 15, ForceMode.Impulse);
+            Invoke("ResetCooldown", 0.7f);
+        }
+    }
+    void ResetCooldown()
+    {
+        cooldown = false;
+    }
     private void OnReset()
     {
         steerInputRightThrust = new Vector3(0, 0, 0);
