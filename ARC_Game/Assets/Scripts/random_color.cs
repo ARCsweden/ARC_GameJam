@@ -5,7 +5,7 @@ using UnityEngine;
 public class random_color : MonoBehaviour
 {
     // List of available colors shared by each player instance
-    static List<UnityEngine.Color> availableColors = new List<UnityEngine.Color> { Color.black, Color.blue, Color.cyan, Color.green, Color.grey, Color.magenta, Color.red, Color.white, Color.yellow };
+    static List<UnityEngine.Color> availableColors = new List<UnityEngine.Color> {Color.blue, Color.cyan, Color.grey, Color.magenta, Color.red, Color.yellow };
 
     // Start is called before the first frame update
     void Start()

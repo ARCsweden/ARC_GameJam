@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4064609594505919065}
   - component: {fileID: 6266536085092407760}
   - component: {fileID: -566987949753804591}
+  - component: {fileID: 3436899133154225291}
   m_Layer: 0
   m_Name: TorpedoPref
   m_TagString: Torpedo
@@ -44,7 +45,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3893171990877279611}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 200
   m_Drag: 2
   m_AngularDrag: 1
   m_UseGravity: 0
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6088ce6b2ba8428479fb2ea9c93eb948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torpTorque: 0.15
+  torpTorque: 50
 --- !u!114 &6266536085092407760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb637ef76d25064ba7474b19554d537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torpThrust: 20
+  torpThrust: 3000
 --- !u!114 &-566987949753804591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +92,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TorpedoExplosion: {fileID: 5357334890267661380, guid: 1bb0bd6a406d9694ab5351201596cef4, type: 3}
+--- !u!136 &3436899133154225291
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3893171990877279611}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 1.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4664619409526572056
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,8 +133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4664619409526572056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0, z: 0.37}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.6, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8393996705254035509}
@@ -184,7 +199,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4664619409526572056}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

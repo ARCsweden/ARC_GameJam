@@ -40,16 +40,16 @@ public class TorpedoHoming : MonoBehaviour
     private void FindTarget()
     {
         //finds all game object with tag Player
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Player");
+        //GameObject[] gos;
+        //gos = GameObject.FindGameObjectsWithTag("Player");
 
-        /*GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Torpedo");
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        GameObject[] gos = new GameObject[targets.Length + targets.Length];
+        GameObject[] gos = new GameObject[targets.Length + players.Length];
 
         targets.CopyTo(gos, 0);
-        players.CopyTo(gos, targets.Length);*/
+        players.CopyTo(gos, targets.Length);
 
         //finds the Player that is closest in angle to the torpedo and within 45
         GameObject closest = null;
@@ -59,7 +59,7 @@ public class TorpedoHoming : MonoBehaviour
         {
             Vector3 diff = go.transform.position - position;
             float curDistance = Vector3.Angle(diff, transform.up);
-            if (curDistance < distance && curDistance < 45)
+            if (curDistance < distance && curDistance < 45 && go != gameObject)
             {
                 closest = go;
                 distance = curDistance;

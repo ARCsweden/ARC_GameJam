@@ -15,7 +15,7 @@ public class TorpedoCollision : MonoBehaviour
 
     void Explode()
     {
-        Debug.Log("BOOM");
+        //Debug.Log("BOOM");
         GameObject Explosion = Instantiate(TorpedoExplosion);
         Explosion.transform.position = transform.position; 
         Destroy(gameObject);

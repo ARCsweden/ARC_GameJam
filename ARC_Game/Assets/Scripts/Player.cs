@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
         maxHealth = 100;
         health = maxHealth;
         healthBar.UpdateHealthBar();
+        transform.position = new Vector3(Random.Range(-10,10), Random.Range(-10, 10),0);
     }
 
     private void FixedUpdate()
@@ -120,7 +121,7 @@ public class Player : MonoBehaviour
             GameObject torpedo = GameObject.Instantiate(prefa, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
             torpedo.transform.Rotate(Vector3.forward, 180);
             torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
-            torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 15, ForceMode.Impulse);
+            torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 3000, ForceMode.Impulse);
             Invoke("ResetCooldown", 0.7f);
         }
     }
@@ -132,7 +133,7 @@ public class Player : MonoBehaviour
     {
         steerInputRightThrust = new Vector3(0, 0, 0);
         steerInputLeftThrust = new Vector3(0, 0, 0);
-        gameObject.transform.position = new Vector3(0, 0, 0);
+        //gameObject.transform.position = new Vector3(0, 0, 0);
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         mainSubRigidbody.angularVelocity = Vector3.zero;
         leftThrusterRigidbody.angularVelocity = Vector3.zero;
@@ -140,5 +141,6 @@ public class Player : MonoBehaviour
         mainSubRigidbody.velocity = Vector3.zero;
         leftThrusterRigidbody.velocity = Vector3.zero;
         rightThrusterRigidbody.velocity = Vector3.zero;
+        transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
     }
 }

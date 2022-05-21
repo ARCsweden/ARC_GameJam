@@ -9,7 +9,7 @@ public class FlapField : MonoBehaviour
     public FlapVisual flapVisual;
     private HashSet<GameObject> _inrange = new HashSet<GameObject>();
 
-    static List<string> tracked_tags = new List<string> {"Player", "Module"};
+    static List<string> tracked_tags = new List<string> {"Player", "Module", "Torpedo"};
 
     void OnDisable()
     {
@@ -44,11 +44,20 @@ void Start()
     void FixedUpdate()
     {
         float ff = flapVisual.flapForce;
+
         foreach(GameObject gB in _inrange){
-            Debug.Log(gB.name + ", " + gameObject.name);
-            Rigidbody rig = gB.GetComponent<Rigidbody>();
-            Vector3 dir = gB.transform.position - gameObject.transform.position;
-            rig.AddForce(ff * dir);
+            if (gB != null)
+            {
+                Debug.Log(gB.name + ", " + gameObject.name);
+                Rigidbody rig = gB.GetComponent<Rigidbody>();
+                Vector3 dir = gB.transform.position - gameObject.transform.position;
+                rig.AddForce(ff * dir);
+            }else
+            {
+                _inrange.Remove(gB);
+                break;
+            }
+
         }
     }
 }
