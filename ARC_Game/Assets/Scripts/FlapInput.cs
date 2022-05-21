@@ -5,22 +5,26 @@ using UnityEngine.InputSystem;
 
 public class FlapInput : MonoBehaviour
 {
+    public float finPos;
+    float getInputFinDown;
+    float getInputFinUp;
     // Start is called before the first frame update
     void Start()
     {
-        
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        finPos = getInputFinUp - getInputFinDown;
+        Debug.Log("FinPos: " + finPos);
     }
 
     private void OnFinUp(InputValue input)
     {
 
-        float getInputFinUp = input.Get<float>();
+        getInputFinUp = input.Get<float>();
         Debug.Log("FinUp: " + getInputFinUp);
 
     }
@@ -28,8 +32,8 @@ public class FlapInput : MonoBehaviour
     private void OnFinDown(InputValue input)
     {
 
-        float getInputFinDown = input.Get<float>();
-        Debug.Log("FinDown: " + getInputFinDown);
+        getInputFinDown = input.Get<float>();
+        
 
     }
 }
