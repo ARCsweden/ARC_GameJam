@@ -85,6 +85,8 @@ public class Player : MonoBehaviour
 
         GameObject torpedo = GameObject.Instantiate(prefa, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
         torpedo.transform.Rotate(Vector3.forward, 180);
+        torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
+        torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 15, ForceMode.Impulse);
     } 
 
     private void OnReset()
