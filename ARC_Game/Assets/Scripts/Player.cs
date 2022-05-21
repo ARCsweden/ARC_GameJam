@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     public float particlePower;
     public int particleEmissionRateOverTime = 20;
 
+    public GameObject prefa;
+    public float space = 2;
+
     // Internal variables:
     Vector3 steerInputRightThrust;
     Vector3 steerInputLeftThrust;
@@ -62,5 +65,40 @@ public class Player : MonoBehaviour
         Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
+    }
+
+    private void OnTorpedo()
+    {
+        //LeftThrusterRigidbody.AddForce(0, 0, 0);
+        //RightThrusterRigidbody.AddForce(0, 0, 0);
+        /*SteerInputRightThrust = new Vector3(0, 0, 0);
+        SteerInputLeftThrust = new Vector3(0, 0, 0);
+        gameObject.transform.position = new Vector3(0,0,0);
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        MainSubRigidbody.angularVelocity = Vector3.zero;
+        LeftThrusterRigidbody.angularVelocity = Vector3.zero;
+        RightThrusterRigidbody.angularVelocity = Vector3.zero;
+        MainSubRigidbody.velocity = Vector3.zero;
+        LeftThrusterRigidbody.velocity = Vector3.zero;
+        RightThrusterRigidbody.velocity = Vector3.zero;
+        //SteerInputLeftThrust = new Vector3(0, 10, 0);*/
+        Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3 (0,-space,0));
+
+        GameObject.Instantiate(prefa, spawnPoint, gameObject.transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
+        
+    } 
+
+    private void OnReset()
+    {
+        steerInputRightThrust = new Vector3(0, 0, 0);
+        steerInputLeftThrust = new Vector3(0, 0, 0);
+        gameObject.transform.position = new Vector3(0, 0, 0);
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        mainSubRigidbody.angularVelocity = Vector3.zero;
+        leftThrusterRigidbody.angularVelocity = Vector3.zero;
+        rightThrusterRigidbody.angularVelocity = Vector3.zero;
+        mainSubRigidbody.velocity = Vector3.zero;
+        leftThrusterRigidbody.velocity = Vector3.zero;
+        rightThrusterRigidbody.velocity = Vector3.zero;
     }
 }
