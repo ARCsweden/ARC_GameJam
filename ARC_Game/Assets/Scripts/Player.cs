@@ -84,8 +84,8 @@ public class Player : MonoBehaviour
         //SteerInputLeftThrust = new Vector3(0, 10, 0);*/
         Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3 (0,-space,0));
 
-        GameObject.Instantiate(prefa, spawnPoint, gameObject.transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
-        
+        GameObject torpedo = GameObject.Instantiate(prefa, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
+        torpedo.transform.Rotate(Vector3.forward, 180);
     } 
 
     private void OnReset()
