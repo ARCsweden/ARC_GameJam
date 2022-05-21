@@ -9675,7 +9675,7 @@ GameObject:
   - component: {fileID: 5024538555614501192}
   m_Layer: 0
   m_Name: SubBody
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9772,7 +9772,7 @@ Rigidbody:
   m_GameObject: {fileID: 7422775702577392106}
   serializedVersion: 2
   m_Mass: 1500
-  m_Drag: 0.2
+  m_Drag: 0.3
   m_AngularDrag: 3
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -9826,7 +9826,7 @@ MonoBehaviour:
   rightThrusterRigidbody: {fileID: 7422775704237066046}
   leftThrusterParticleSystem: {fileID: 2034629336946529519}
   rightThrusterParticleSystem: {fileID: 7245374216757623485}
-  thrustPower: 1000
+  thrustPower: 3500
   particlePower: 0
   particleEmissionRateOverTime: 20
   prefa: {fileID: 3893171990877279611, guid: 5abe9bcab3d21e24581256003a2234ef, type: 3}

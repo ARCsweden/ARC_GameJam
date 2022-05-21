@@ -35,14 +35,13 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        leftThrusterRigidbody.AddRelativeForce(steerInputLeftThrust * thrustPower);
+        rightThrusterRigidbody.AddRelativeForce(steerInputRightThrust * thrustPower);
     }
 
     // Update is called once per frame
     void Update()
     {
-        leftThrusterRigidbody.AddRelativeForce(steerInputLeftThrust * thrustPower);
-        rightThrusterRigidbody.AddRelativeForce(steerInputRightThrust * thrustPower);
 
         leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
