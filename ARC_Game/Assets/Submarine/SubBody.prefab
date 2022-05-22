@@ -1012,7 +1012,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5931,7 +5931,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -10305,7 +10305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d7b6d7ad458d64db0add6b6589a2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SubMat: {fileID: 2100000, guid: 7851026658c26824c8cdeec72b3c7de8, type: 2}
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   mainSubRigidbody: {fileID: 7422775702577392084}
   leftThrusterRigidbody: {fileID: 7422775704344752496}
   rightThrusterRigidbody: {fileID: 7422775704237066046}
@@ -10319,6 +10319,7 @@ MonoBehaviour:
   healthBar: {fileID: 1388587585}
   prefa: {fileID: 3893171990877279611, guid: 5abe9bcab3d21e24581256003a2234ef, type: 3}
   space: 2
+  thrustRumble: 1
 --- !u!114 &9142717711789656798
 MonoBehaviour:
   m_ObjectHideFlags: 0
