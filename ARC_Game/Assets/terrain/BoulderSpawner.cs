@@ -32,12 +32,12 @@ public class BoulderSpawner : MonoBehaviour
             {
                 Boulder.transform.position = new Vector3(Random.Range(-15,15), 40, 0);
                 Boulder.GetComponent<Rigidbody>().velocity = new Vector3(0, -1, 0);
-                Destroy(Boulder, 80);
+                Destroy(Boulder, 100);
             }
             else
             {
                 Boulder.GetComponent<Rigidbody>().velocity = new Vector3(0, 1, 0);
-                Destroy(Boulder, 50);
+                Destroy(Boulder, 80);
             }
 
             Boulder.transform.rotation = new Quaternion(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
