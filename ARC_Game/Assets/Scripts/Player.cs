@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
-    private Gamepad curr = null;
+    private Gamepad curr = null;    
 
     // Start is called before the first frame update
     void Start()
