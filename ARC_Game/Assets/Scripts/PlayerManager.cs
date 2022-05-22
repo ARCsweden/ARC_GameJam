@@ -52,17 +52,23 @@ public class PlayerManager : MonoBehaviour
         UpdateScoreText();
     }
 
-    public void UpdateScoreText(){
-        
-        string textToWrite = "";
-        for(int i = 0; i < 10; i++){
-            if(alivePlayers[i] == 1){
-                string color = ColorUtility.ToHtmlStringRGB(colorArray[i]);
-                textToWrite = textToWrite + "<color=#" + color + ">" + "Player " + i + ": " + playerScores[i] + "</color>" + "\n";
-                Debug.Log(color);
+    public void UpdateScoreText()
+    {
+        if (alivePlayers[0] == 1)
+        {
+            string textToWrite = "";
+            for (int i = 0; i < 10; i++)
+            {
+                if (alivePlayers[i] == 1)
+                {
+                    string color = ColorUtility.ToHtmlStringRGB(colorArray[i]);
+                    textToWrite = textToWrite + "<color=#" + color + ">" + "Player " + i + ": " + playerScores[i] + "</color>" + "\n";
+                    //Debug.Log(color);
+                }
             }
+
+            uiText.text = textToWrite;
         }
 
-        uiText.text = textToWrite;
     }
 }
