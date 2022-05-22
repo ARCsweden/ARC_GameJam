@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TorpedoScript : MonoBehaviour
 {
+    public int owner;
     // Start is called before the first frame update
     void Start()
     {

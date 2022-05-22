@@ -6,7 +6,7 @@ public class TorpedoCollision : MonoBehaviour
 {
     public GameObject TorpedoExplosion;
     // Start is called before the first frame update
-
+    public GameObject Sender;
     void OnCollisionEnter(Collision collision)
     {
         Explode();
