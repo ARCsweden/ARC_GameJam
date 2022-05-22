@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
+    public Color playerColor;
     // Rigidbody references:
     public Rigidbody mainSubRigidbody;
     public Rigidbody leftThrusterRigidbody;
@@ -24,12 +24,15 @@ public class Player : MonoBehaviour
 
     public GameObject prefa;
     public float space = 2;
+    public float thrustRumble = 1;
 
     // Internal variables:
     Vector3 steerInputRightThrust;
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
+    private Gamepad curr = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         healthBar.UpdateHealthBar();
         transform.position = new Vector3(Random.Range(-10,10), Random.Range(-10, 10),0);
+        curr = Gamepad.current;
     }
 
     private void FixedUpdate()
@@ -57,6 +61,9 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        
+
+        //playerColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
 
@@ -64,8 +71,12 @@ public class Player : MonoBehaviour
         rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);  
 
         if(health <= 0){
-            Destroy(gameObject);
+            random_color.availableColors.Add(playerColor);
+            //Destroy(gameObject);
+            health = maxHealth;
+            resetSub();
         }
+
 
     }
 
@@ -79,6 +90,12 @@ public class Player : MonoBehaviour
         //Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
+        float left = getInputRightThrust.x;
+        float right = getInputRightThrust.y;
+        if (curr != null)
+        {
+            curr.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble / 2));
+        }
     }
 
     private void OnLeftThruster(InputValue input)
@@ -87,14 +104,36 @@ public class Player : MonoBehaviour
         //Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
+        float left = getInputLeftThrust.x;
+        float right = getInputLeftThrust.y;
+        if(curr != null)
+        {
+            curr.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble / 2));
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
+            if(curr != null)
+            {
+                curr.SetMotorSpeeds(0.25f, 0.75f);
+            }
+            
+            Invoke("rumbleCooldown",0.2f);
             TakeDamage();
         }
+    }
+
+    private void rumbleCooldown()
+    {
+        if(curr != null)
+        {
+            curr.SetMotorSpeeds(0f, 0f);
+        }
+        
     }
 
     private void OnTorpedo()
@@ -122,6 +161,8 @@ public class Player : MonoBehaviour
             torpedo.transform.Rotate(Vector3.forward, 180);
             torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
             torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 3000, ForceMode.Impulse);
+            var topedoRenderer = torpedo.GetComponent<Renderer>();
+            topedoRenderer.material.SetColor("_Color", playerColor); 
             Invoke("ResetCooldown", 0.7f);
         }
     }
@@ -130,6 +171,11 @@ public class Player : MonoBehaviour
         cooldown = false;
     }
     private void OnReset()
+    {
+        resetSub();
+    }
+
+    private void resetSub()
     {
         steerInputRightThrust = new Vector3(0, 0, 0);
         steerInputLeftThrust = new Vector3(0, 0, 0);

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5357334890267661383}
   - component: {fileID: 5357334890267661382}
   - component: {fileID: 5357334890267661381}
-  - component: {fileID: 4091852665711050072}
+  - component: {fileID: 1847782103293045581}
+  - component: {fileID: 117321370365110739}
   m_Layer: 0
   m_Name: TorpedoExplosion
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5357334890267661380}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5.9542494, y: -1.9103851, z: -0.6800957}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -609,7 +610,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1374,10 +1375,10 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.7325934, b: 0.3443396, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 1, g: 0.90095484, b: 0.7567657, a: 0}
+        key1: {r: 0.4783731, g: 0.7119335, b: 0.8113208, a: 1}
+        key2: {r: 0.38937345, g: 0.6147875, b: 0.6603774, a: 0}
         key3: {r: 1, g: 0.7325934, b: 0.3443396, a: 0}
-        key4: {r: 1, g: 1, b: 1, a: 0}
+        key4: {r: 0.36725703, g: 0.54044014, b: 0.5943396, a: 0}
         key5: {r: 1, g: 1, b: 1, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
@@ -4907,7 +4908,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4091852665711050072
+--- !u!114 &1847782103293045581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357334890267661380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3fd11ee2054c64a87d910e1b3fc569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSize: 5
+  explosionForce: 5000
+--- !u!114 &117321370365110739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
