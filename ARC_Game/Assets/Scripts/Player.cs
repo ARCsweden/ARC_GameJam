@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
-    
+    private Gamepad curr = null;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         healthBar.UpdateHealthBar();
         transform.position = new Vector3(Random.Range(-10,10), Random.Range(-10, 10),0);
+        curr = Gamepad.current;
     }
 
     private void FixedUpdate()
@@ -91,7 +92,10 @@ public class Player : MonoBehaviour
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
         float left = getInputRightThrust.x;
         float right = getInputRightThrust.y;
-        Gamepad.current.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble/2));
+        if (curr != null)
+        {
+            curr.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble / 2));
+        }
     }
 
     private void OnLeftThruster(InputValue input)
@@ -102,15 +106,22 @@ public class Player : MonoBehaviour
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
         float left = getInputLeftThrust.x;
         float right = getInputLeftThrust.y;
-        Gamepad.current.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble/2));
+        if(curr != null)
+        {
+            curr.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble / 2));
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
+            if(curr != null)
+            {
+                curr.SetMotorSpeeds(0.25f, 0.75f);
+            }
             
-            Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
             Invoke("rumbleCooldown",0.2f);
             TakeDamage();
         }
@@ -118,7 +129,11 @@ public class Player : MonoBehaviour
 
     private void rumbleCooldown()
     {
-        Gamepad.current.SetMotorSpeeds(0f, 0f);
+        if(curr != null)
+        {
+            curr.SetMotorSpeeds(0f, 0f);
+        }
+        
     }
 
     private void OnTorpedo()
