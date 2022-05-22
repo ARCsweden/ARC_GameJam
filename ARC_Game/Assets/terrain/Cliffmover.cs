@@ -16,7 +16,7 @@ public class Cliffmover : MonoBehaviour
     void Update()
     {
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
-        if (gameObject.transform.position.y > 50)
+        if (gameObject.transform.position.y > 100)
         {
             gameObject.transform.position = new Vector3(xPos, -50, 10.1f);
         }
