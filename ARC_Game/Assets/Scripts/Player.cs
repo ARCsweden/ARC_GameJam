@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
 
     private void OnMine()
     {
-        Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3(0, -space, 0));
+        Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3(0, space*2, 0));
         GameObject mine = GameObject.Instantiate(prefaMine, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
         mine.transform.Rotate(Vector3.forward, 180);
         mine.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
