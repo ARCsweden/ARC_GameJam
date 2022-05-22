@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public PlayerManager playerManager;
     public Color playerColor;
     // Rigidbody references:
     public Rigidbody mainSubRigidbody;
@@ -20,11 +21,13 @@ public class Player : MonoBehaviour
     public float particlePower;
     public int particleEmissionRateOverTime = 20;
     public float health, maxHealth;
-    public HealthBar healthBar; 
+    public HealthBar healthBar;
 
     public GameObject prefa;
     public float space = 2;
     private float thrustRumble = 0.1f;
+
+    public int playerIndex;
 
     // Internal variables:
     Vector3 steerInputRightThrust;
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerManager = FindObjectOfType<PlayerManager>();
         maxHealth = 100;
         health = maxHealth;
         healthBar.UpdateHealthBar();
@@ -71,10 +75,12 @@ public class Player : MonoBehaviour
         rightThrusterParticleSystem.emissionRate = particleEmissionRateOverTime * Mathf.Abs(steerInputRightThrust.y);  
 
         if(health <= 0){
-            random_color.availableColors.Add(playerColor);
+            //random_color.availableColors.Add(playerColor);
             //Destroy(gameObject);
             health = maxHealth;
             resetSub();
+            playerManager.removeScore(20, playerIndex);
+
         }
 
 
@@ -117,6 +123,11 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
+            if(health < 10f && collision.collider.gameObject.CompareTag("Torpedo")){
+                GameObject torpedo = collision.gameObject;
+                int index = torpedo.GetComponent<TorpedoScript>().owner;
+                playerManager.addScore(50, index);
+            }
             if(curr != null)
             {
                 curr.SetMotorSpeeds(0.75f, 1f);
@@ -156,11 +167,11 @@ public class Player : MonoBehaviour
         {
             cooldown = true;
             Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3 (0,-space,0));
-
             GameObject torpedo = GameObject.Instantiate(prefa, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
             torpedo.transform.Rotate(Vector3.forward, 180);
             torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
             torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 3000, ForceMode.Impulse);
+            torpedo.GetComponent<TorpedoScript>().owner = playerIndex;
             var topedoRenderer = torpedo.GetComponent<Renderer>();
             topedoRenderer.material.SetColor("_Color", playerColor); 
             Invoke("ResetCooldown", 0.7f);
