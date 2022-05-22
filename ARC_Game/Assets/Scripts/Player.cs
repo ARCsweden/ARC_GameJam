@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
 
     public GameObject prefa;
+    public GameObject prefaMine;
     public float space = 2;
     private float thrustRumble = 0.1f;
 
@@ -177,6 +178,19 @@ public class Player : MonoBehaviour
             Invoke("ResetCooldown", 0.7f);
         }
     }
+
+    private void OnMine()
+    {
+        Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3(0, -space, 0));
+        GameObject mine = GameObject.Instantiate(prefaMine, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
+        mine.transform.Rotate(Vector3.forward, 180);
+        mine.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
+        mine.GetComponent<TorpedoScript>().owner = playerIndex;
+        var topedoRenderer = mine.GetComponent<Renderer>();
+        topedoRenderer.material.SetColor("_Color", playerColor);
+    }
+
+
     void ResetCooldown()
     {
         cooldown = false;

@@ -10321,6 +10321,7 @@ MonoBehaviour:
   maxHealth: 20
   healthBar: {fileID: 1388587585}
   prefa: {fileID: 3893171990877279611, guid: 5abe9bcab3d21e24581256003a2234ef, type: 3}
+  prefaMine: {fileID: 8586215382217546553, guid: 5793b8bbda15ea240a92eb6dab030e32, type: 3}
   space: 2
   playerIndex: 0
 --- !u!114 &9142717711789656798
