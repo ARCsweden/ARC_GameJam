@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +57,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
+
         //playerColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
@@ -69,6 +73,7 @@ public class Player : MonoBehaviour
             health = maxHealth;
             resetSub();
         }
+
 
     }
 
@@ -96,8 +101,16 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
+            
+            Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+            Invoke("rumbleCooldown",0.2f);
             TakeDamage();
         }
+    }
+
+    private void rumbleCooldown()
+    {
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
 
     private void OnTorpedo()
