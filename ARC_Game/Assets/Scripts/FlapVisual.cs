@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FlapVisual : MonoBehaviour
 {
+    public ParticleSystem finParticleSystem;
+    public float finEmission = 2;
+
     public Rigidbody rig;
     public FlapInput flapper;
     float lastAngle = 0;
@@ -12,11 +15,14 @@ public class FlapVisual : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        var em = finParticleSystem.emission;
+
         // Transform flapper.finPos to an angle between -45 and 45, and set the rotation to that
         Quaternion rotation = Quaternion.identity;
         currAngle = Mathf.LerpAngle(-45, 45, (flapper.finPos + 1)/2);
@@ -28,7 +34,9 @@ public class FlapVisual : MonoBehaviour
         flapForce = Mathf.Abs((currAngle - lastAngle) * 1000);
         flapForce = Mathf.Clamp(flapForce, 0, 10000);
         rig.AddForce(-rig.transform.up * flapForce * 0.2f);
-        lastAngle = currAngle;
 
+        em.rateOverTime = Mathf.Abs((currAngle - lastAngle) * finEmission);
+
+        lastAngle = currAngle;
     }
 }
