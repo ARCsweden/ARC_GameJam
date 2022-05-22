@@ -24,12 +24,15 @@ public class Player : MonoBehaviour
 
     public GameObject prefa;
     public float space = 2;
+    public float thrustRumble = 1;
 
     // Internal variables:
     Vector3 steerInputRightThrust;
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
+
         //playerColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
@@ -70,6 +76,7 @@ public class Player : MonoBehaviour
             resetSub();
         }
 
+
     }
 
     private void OnDamage(){
@@ -82,6 +89,9 @@ public class Player : MonoBehaviour
         //Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
+        float left = getInputRightThrust.x;
+        float right = getInputRightThrust.y;
+        Gamepad.current.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble/2));
     }
 
     private void OnLeftThruster(InputValue input)
@@ -90,14 +100,25 @@ public class Player : MonoBehaviour
         //Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
+        float left = getInputLeftThrust.x;
+        float right = getInputLeftThrust.y;
+        Gamepad.current.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble/2));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
+            
+            Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+            Invoke("rumbleCooldown",0.2f);
             TakeDamage();
         }
+    }
+
+    private void rumbleCooldown()
+    {
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
 
     private void OnTorpedo()
