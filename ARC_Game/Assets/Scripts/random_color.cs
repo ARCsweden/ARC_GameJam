@@ -30,7 +30,8 @@ public class random_color : MonoBehaviour
 
             playerRenderer.material.SetColor("_Color", Color.green);
             Player playerScript = gameObject.GetComponent<Player>();
-            playerScript.playerColor = Color.green;
+            playerScript.UpdateColor(Color.green);
+            //playerScript.playerColor = Color.green;
         }
         else
         // Use a random color of the available colors and remove that color from the list
@@ -52,7 +53,8 @@ public class random_color : MonoBehaviour
 
             playerRenderer.material.SetColor("_Color", playerColor);
             Player playerScript = gameObject.GetComponent<Player>();
-            playerScript.playerColor = playerColor;
+            playerScript.UpdateColor(playerColor);
+            //playerScript.playerColor = playerColor;
         }
 
     }

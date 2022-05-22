@@ -47,6 +47,11 @@ public class Player : MonoBehaviour
         curr = Gamepad.current;
     }
 
+    public void UpdateColor(Color color){
+        playerColor = color;
+        playerManager.colorArray[playerIndex] = playerColor;
+    }
+
     private void FixedUpdate()
     {
         leftThrusterRigidbody.AddRelativeForce(steerInputLeftThrust * thrustPower);
@@ -54,10 +59,10 @@ public class Player : MonoBehaviour
     }
 
     // if damage is taken, calls a function in the healthbar script
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
         // Use your own damage handling code, or this example one.    
-        health -= 10f;
+        health -= damage;
         healthBar.UpdateHealthBar();
     }
 
@@ -86,10 +91,10 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnDamage(){
+    /*private void OnDamage(){
         //Debug.Log("TakeDamage");
-        TakeDamage();
-    }
+        TakeDamage(10f);
+    }*/
     private void OnRightThruster(InputValue input)
     {
         Vector2 getInputRightThrust = input.Get<Vector2>();
@@ -123,10 +128,13 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Torpedo") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Terrain"))
         {
-            if(health < 10f && collision.collider.gameObject.CompareTag("Torpedo")){
+            if(health <= 20f && collision.collider.gameObject.CompareTag("Torpedo")){
                 GameObject torpedo = collision.gameObject;
                 int index = torpedo.GetComponent<TorpedoScript>().owner;
+                Debug.Log("owner: " + index);
                 playerManager.addScore(50, index);
+                //playerManager.colorArray[index] = torpedo.GetComponent<TorpedoScript>().color;
+                TakeDamage(10f);
             }
             if(curr != null)
             {
@@ -134,7 +142,7 @@ public class Player : MonoBehaviour
             }
             
             Invoke("rumbleCooldown",0.2f);
-            TakeDamage();
+            TakeDamage(10f);
         }
     }
 
@@ -172,6 +180,7 @@ public class Player : MonoBehaviour
             torpedo.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
             torpedo.GetComponent<Rigidbody>().AddForce(-transform.up * 3000, ForceMode.Impulse);
             torpedo.GetComponent<TorpedoScript>().owner = playerIndex;
+            torpedo.GetComponent<TorpedoScript>().color = playerColor;
             var topedoRenderer = torpedo.GetComponent<Renderer>();
             topedoRenderer.material.SetColor("_Color", playerColor); 
             Invoke("ResetCooldown", 0.7f);
