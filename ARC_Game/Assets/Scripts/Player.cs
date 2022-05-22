@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     public GameObject prefa;
     public float space = 2;
-    public float thrustRumble = 1;
+    private float thrustRumble = 0.1f;
 
     // Internal variables:
     Vector3 steerInputRightThrust;
@@ -90,11 +90,11 @@ public class Player : MonoBehaviour
         //Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
-        float left = getInputRightThrust.x;
-        float right = getInputRightThrust.y;
+        float left = Mathf.Clamp(Mathf.Abs(getInputRightThrust.y), 0, thrustRumble);
+        float right = Mathf.Clamp(Mathf.Abs(getInputRightThrust.y), 0, thrustRumble/2);
         if (curr != null)
         {
-            curr.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble / 2));
+            curr.SetMotorSpeeds(left,right);
         }
     }
 
@@ -104,11 +104,11 @@ public class Player : MonoBehaviour
         //Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
-        float left = getInputLeftThrust.x;
-        float right = getInputLeftThrust.y;
-        if(curr != null)
+        float left = Mathf.Clamp(Mathf.Abs(getInputLeftThrust.y), 0, thrustRumble);
+        float right = Mathf.Clamp(Mathf.Abs(getInputLeftThrust.y), 0, thrustRumble / 2);
+        if (curr != null)
         {
-            curr.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble / 2));
+            curr.SetMotorSpeeds(left, right);
         }
         
     }
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
         {
             if(curr != null)
             {
-                curr.SetMotorSpeeds(0.25f, 0.75f);
+                curr.SetMotorSpeeds(0.75f, 1f);
             }
             
             Invoke("rumbleCooldown",0.2f);
