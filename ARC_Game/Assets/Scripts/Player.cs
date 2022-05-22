@@ -24,12 +24,14 @@ public class Player : MonoBehaviour
 
     public GameObject prefa;
     public float space = 2;
+    public float thrustRumble = 1;
 
     // Internal variables:
     Vector3 steerInputRightThrust;
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +89,9 @@ public class Player : MonoBehaviour
         //Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
+        float left = getInputRightThrust.x;
+        float right = getInputRightThrust.y;
+        Gamepad.current.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble/2));
     }
 
     private void OnLeftThruster(InputValue input)
@@ -95,6 +100,9 @@ public class Player : MonoBehaviour
         //Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
+        float left = getInputLeftThrust.x;
+        float right = getInputLeftThrust.y;
+        Gamepad.current.SetMotorSpeeds(Mathf.Clamp(Mathf.Abs(left), 0, thrustRumble), Mathf.Clamp(Mathf.Abs(right), 0, thrustRumble/2));
     }
 
     private void OnCollisionEnter(Collision collision)
