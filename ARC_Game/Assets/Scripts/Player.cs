@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
     public GameObject prefa;
     public float space = 2;
+    private float thrustRumble = 0.1f;
 
     public int playerIndex;
 
@@ -33,6 +34,8 @@ public class Player : MonoBehaviour
     Vector3 steerInputLeftThrust;
 
     private bool cooldown = false;
+    private Gamepad curr = null;    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         healthBar.UpdateHealthBar();
         transform.position = new Vector3(Random.Range(-10,10), Random.Range(-10, 10),0);
+        curr = Gamepad.current;
     }
 
     private void FixedUpdate()
@@ -60,6 +64,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
+
         //playerColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         leftThrusterParticleSystem.startSpeed = particlePower * (-steerInputLeftThrust.y);
         leftThrusterParticleSystem.emissionRate = particleEmissionRateOverTime* Mathf.Abs(steerInputLeftThrust.y);
@@ -76,6 +83,7 @@ public class Player : MonoBehaviour
 
         }
 
+
     }
 
     private void OnDamage(){
@@ -88,6 +96,12 @@ public class Player : MonoBehaviour
         //Debug.Log("Right Stick - X: " + getInputRightThrust.x + "     Y: " + getInputRightThrust.y);
 
         steerInputRightThrust = new Vector3(0, -getInputRightThrust.y, 0);
+        float left = Mathf.Clamp(Mathf.Abs(getInputRightThrust.y), 0, thrustRumble);
+        float right = Mathf.Clamp(Mathf.Abs(getInputRightThrust.y), 0, thrustRumble/2);
+        if (curr != null)
+        {
+            curr.SetMotorSpeeds(left,right);
+        }
     }
 
     private void OnLeftThruster(InputValue input)
@@ -96,6 +110,13 @@ public class Player : MonoBehaviour
         //Debug.Log("Left Stick - X: " + getInputLeftThrust.x + "     Y: " + getInputLeftThrust.y);
 
         steerInputLeftThrust = new Vector3(0, -getInputLeftThrust.y, 0);
+        float left = Mathf.Clamp(Mathf.Abs(getInputLeftThrust.y), 0, thrustRumble);
+        float right = Mathf.Clamp(Mathf.Abs(getInputLeftThrust.y), 0, thrustRumble / 2);
+        if (curr != null)
+        {
+            curr.SetMotorSpeeds(left, right);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -107,8 +128,23 @@ public class Player : MonoBehaviour
                 int index = torpedo.GetComponent<TorpedoScript>().owner;
                 playerManager.addScore(50, index);
             }
+            if(curr != null)
+            {
+                curr.SetMotorSpeeds(0.75f, 1f);
+            }
+            
+            Invoke("rumbleCooldown",0.2f);
             TakeDamage();
         }
+    }
+
+    private void rumbleCooldown()
+    {
+        if(curr != null)
+        {
+            curr.SetMotorSpeeds(0f, 0f);
+        }
+        
     }
 
     private void OnTorpedo()
