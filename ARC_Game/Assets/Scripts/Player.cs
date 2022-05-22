@@ -186,7 +186,7 @@ public class Player : MonoBehaviour
         if(mineCooldown == false)
         {
             mineCooldown = true;
-            Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3(0, space * 1.5f, 0));
+            Vector3 spawnPoint = gameObject.transform.position + (gameObject.transform.rotation * new Vector3(0, space * 1.3f, 0));
             GameObject mine = GameObject.Instantiate(prefaMine, spawnPoint, transform.rotation);//new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z), gameObject.transform.rotation);
             mine.transform.Rotate(Vector3.forward, 180);
             mine.GetComponent<Rigidbody>().velocity = mainSubRigidbody.velocity;
